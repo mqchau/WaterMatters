@@ -7,7 +7,9 @@
 	},
 	"dependencies": {
 		"express": "4.12.x",
-		"cfenv": "1.0.x"
+		"cfenv": "1.0.x",
+		"body-parser": "~",
+		"satelize": "~"
 	},
 	"repository": {}
 }
