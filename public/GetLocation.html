@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>NodeJS Starter Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/style.css">
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script>
+		$.ajax({
+			type: 'POST', // added,
+			url: '/login',
+			data: {"data": "TEST"},
+			success: function (data) {
+				console.log(data);
+				//var ret = jQuery.parseJSON(data);
+				//$('#lblResponse').html(ret.msg);
+			},
+			error: function (xhr, status, error) {
+				console.log('Error: ' + error.message);
+				$('#lblResponse').html('Error connecting to the server.');
+			}
+		});
+	</script>
+  </head>
+
+  <body>
+	Hello world.
+
+  </body>
+
+</html>
