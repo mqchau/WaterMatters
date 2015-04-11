@@ -13,6 +13,7 @@ var satelize = require('satelize');
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
 var requestIp = require('request-ip');
+var http = require('http');
 
 // create a new express server
 var app = express();
@@ -24,17 +25,41 @@ app.use(express.static(__dirname + '/public'));
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 
+function GetCityInformation(CityName, StateName, callback) {
+    return http.get({
+        host: 'api.sba.gov',
+        path: '/geodata/all_links_for_city_of/' + CityName + '/' + StateName + '.json'
+    }, function(response) {
+        // Continuously update stream with data
+        var body = '';
+        response.on('data', function(d) {
+            body += d;
+        });
+        response.on('end', function() {
+
+            // Data reception is done, do whatever with it!
+            var parsed = JSON.parse(body);
+            callback(parsed);
+        });
+    });
+
+};
+
 app.post('/login',function(req,res){
 	var data = req.body.data;
-	console.log("data = " + data);
-
 	var ip = requestIp.getClientIp(req);
 
-	console.log("ip = " + ip);
+	if (ip == "127.0.0.1"){
+		ip = "184.177.20.169";
+	} 
+
 	satelize.satelize({ip:ip}, function(err, geoData){
 		var obj = JSON.parse(geoData);
-		console.log("result ip lookup = " + geoData);
-		res.end(geoData);
+		GetCityInformation( obj.city.replace(' ', '%20'), obj.region_code, function (cityinfo){
+			res.end("You're in " + cityinfo[0].full_county_name + " in " + cityinfo[0].state_name);
+			//res.end(JSON.stringify(cityinfo));
+		});
+
 	});
 });
 
