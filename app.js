@@ -14,6 +14,7 @@ var satelize = require('satelize');
 var cfenv = require('cfenv');
 var requestIp = require('request-ip');
 var http = require('http');
+var hardcode_data = require('./hardcode_data');
 
 // create a new express server
 var app = express();
@@ -61,6 +62,16 @@ app.post('/login',function(req,res){
 		});
 
 	});
+});
+
+app.get('/ajaxget', function(req, res){
+	console.log('ajaxget: ' + JSON.stringify(req.query));
+	var data = req.query;
+	if (data.functionName == 'getStateList'){
+		res.end(JSON.stringify({
+			"StateList": hardcode_data.StateList
+		}));
+	}
 });
 
 // start server on the specified port and binding host
