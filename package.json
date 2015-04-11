@@ -9,7 +9,8 @@
 		"express": "4.12.x",
 		"cfenv": "1.0.x",
 		"body-parser": "latest",
-		"satelize": "latest"
+		"satelize": "latest",
+		"request-ip": "latest"
 	},
 	"repository": {}
 }

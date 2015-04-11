@@ -12,7 +12,7 @@ var satelize = require('satelize');
 // cfenv provides access to your Cloud Foundry environment
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
-
+var requestIp = require('request-ip');
 
 // create a new express server
 var app = express();
@@ -28,10 +28,7 @@ app.post('/login',function(req,res){
 	var data = req.body.data;
 	console.log("data = " + data);
 
-	var ip = req.headers['x-forwarded-for'] || 
-	 req.connection.remoteAddress || 
-	 req.socket.remoteAddress ||
-	 req.connection.socket.remoteAddress;
+	var ip = requestIp.getClientIp(req);
 
 	console.log("ip = " + ip);
 	satelize.satelize({ip:ip}, function(err, geoData){
