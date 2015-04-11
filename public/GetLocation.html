@@ -18,6 +18,7 @@
 				console.log(data);
 				//var ret = jQuery.parseJSON(data);
 				//$('#lblResponse').html(ret.msg);
+				$("#LocationData").html(data);
 			},
 			error: function (xhr, status, error) {
 				console.log('Error: ' + error.message);
@@ -29,7 +30,9 @@
 
   <body>
 	Hello world.
-
+	<div id="LocationData">
+		
+	</div>
   </body>
 
 </html>

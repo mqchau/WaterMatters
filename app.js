@@ -13,9 +13,6 @@ var satelize = require('satelize');
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
 
-//satelize.satelize({ip:'46.19.37.108'}, function(err, geoData){
-//    var obj = JSON.parse(geoData);
-//});
 
 // create a new express server
 var app = express();
@@ -30,11 +27,18 @@ var appEnv = cfenv.getAppEnv();
 app.post('/login',function(req,res){
 	var data = req.body.data;
 	console.log("data = " + data);
-	res.end("good");
-  //var user_name=req.body.user;
-  //var password=req.body.password;
-  //console.log("User name = "+user_name+", password is "+password);
-  //res.end("yes");
+
+	var ip = req.headers['x-forwarded-for'] || 
+	 req.connection.remoteAddress || 
+	 req.socket.remoteAddress ||
+	 req.connection.socket.remoteAddress;
+
+	console.log("ip = " + ip);
+	satelize.satelize({ip:ip}, function(err, geoData){
+		var obj = JSON.parse(geoData);
+		console.log("result ip lookup = " + geoData);
+		res.end(geoData);
+	});
 });
 
 // start server on the specified port and binding host
@@ -44,7 +48,3 @@ app.listen(appEnv.port, appEnv.bind, function() {
   console.log("server starting on " + appEnv.url);
 });
 
-//var ip = req.headers['x-forwarded-for'] || 
-//     req.connection.remoteAddress || 
-//     req.socket.remoteAddress ||
-//     req.connection.socket.remoteAddress;
