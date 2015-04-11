@@ -1,0 +1,8 @@
+applications:
+- disk_quota: 1024M
+  host: watermatters
+  name: WaterMatters
+  path: .
+  domain: mybluemix.net
+  instances: 1
+  memory: 256M
