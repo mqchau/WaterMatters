@@ -19,14 +19,14 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
 // Connection URL
-var MongoUrl = 'mongodb://localhost:27017/myproject';
+var MongoUrl = 'mongodb://127.0.0.1:27017/test';
 var WaterDataCollection = "WaterDataCollection";
 // Use connect method to connect to the Server
-MongoClient.connect(MongoUrl, function(err, db) {
-  assert.equal(null, err);
-  console.log("Connected correctly to server");
-  db.close();
-});
+//MongoClient.connect(MongoUrl, function(err, db) {
+//  assert.equal(null, err);
+//  console.log("Connected correctly to server");
+//  db.close();
+//});
 
 var WaterSupplyDemandDataLib = require('./WaterSupplyDemandData'); 
 var WaterSupplyDemandData = WaterSupplyDemandDataLib.WaterSupplyDemandData;
@@ -94,35 +94,30 @@ function getCountyList(StateAbbr, callback){
         });
     });
 }
-
-//var clearDocuments = function(){
-//    MongoClient.connect(MongoUrl, function(err, db) {
-//        var collection = db.collection(WaterDataCollection);
-//        collection.remove({});
-//        db.close();
-//    });
-//}
-
-var initializeAllWaterData = function(Wather) {
-	MongoClient.connect(MongoUrl, function(err, db) {
-		var collection = db.collection(WaterDataCollection);
-		//clear old data
+//--------------------------------------------------
+// Routes allowed in this app
+//--------------------------------------------------
+MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
+	db.createCollection('WaterDataCollection', function(err, collection){
+		if (err) { console.log("Got error creating collection"); throw err;}
 		collection.remove({});
-		collection.insert(WaterSupplyDemandData);
-		db.close();
+		for (var i = 0; i < WaterSupplyDemandData.length; i++){
+			collection.insert(WaterSupplyDemandData[i]);
+		}
 	});
-  //// Get the documents collection
-  //var collection = db.collection(WaterDataCollection);
-  //// Insert some documents
-  //collection.insert([
-  //  {a : 1}, {a : 2}, {a : 3}
-  //], function(err, result) {
-  //  assert.equal(err, null);
-  //  assert.equal(3, result.result.n);
-  //  assert.equal(3, result.ops.length);
-  //  console.log("Inserted 3 documents into the document collection");
-  //  callback(result);
-  //});
+});
+
+function getWaterDataByStateCountyMongoDB(StateAbbr, County, callback){
+	
+	console.log("querying " + StateAbbr + " and county " + County);
+	MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
+		var collection = db.collection('WaterDataCollection');		
+		collection.findOne({"StateAbbr": StateAbbr, "County": County}, function(err, find_result){
+			if (err) throw err;	
+			console.log(find_result);
+			callback(find_result);
+		});
+	});
 }
 //--------------------------------------------------
 // Routes allowed in this app
@@ -182,18 +177,24 @@ app.get('/ajaxget', function(req, res){
 	} else if (data.functionName == 'getWaterData'){
 		var lookup_result = getWaterDataByStateCounty(data.StateAbbr, data.County);
 		if (lookup_result == null){ 
-			res.send(500, {'error': "Can't find info for this state and county"});
+			res.status(500).send({'error': "Can't find info for this state and county"});
 		} else {
 			res.end(JSON.stringify(lookup_result));
 		}
+	} else if (data.functionName == 'getWaterDataMongoDB'){
+		getWaterDataByStateCountyMongoDB(data.StateAbbr, data.County, function(lookup_result){
+			if (lookup_result == null){ 
+				res.status(500).send({'error': "Can't find info for this state and county"});
+			} else {
+				res.end(JSON.stringify(lookup_result));
+			}
+		});
 	}
 });
 
 //--------------------------------------------------
 // Main function
 //--------------------------------------------------
-initializeAllWaterData();
-
 // start server on the specified port and binding host
 app.listen(appEnv.port, appEnv.bind, function() {
 

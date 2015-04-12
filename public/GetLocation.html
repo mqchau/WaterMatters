@@ -64,7 +64,7 @@
 					type: 'GET', 
 					url: '/ajaxget',
 					data: {
-						functionName: "getWaterData",
+						functionName: "getWaterDataMongoDB",
 						StateAbbr: 'CA',
 						County: 'Yolo County'
 					},
@@ -73,7 +73,7 @@
 						$("#AjaxGetReturn").html(data);
 					},
 					error: function (xhr, status, error) {
-						console.log('Error: ' + error.message);
+						alert('Error: ' + error.message);
 					}
 				});
 			} else if (AjaxTestSelection == 4) {
