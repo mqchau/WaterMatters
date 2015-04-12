@@ -80,3 +80,19 @@ pre {
 	margin: 0;
 }
 
+.loader {
+	/*position: fixed;*/
+	/*left: 0px;*/
+	/*top: 0px;*/
+	/*width: 100px;*/
+	/*height: 100px;*/
+	/*z-index: 9999;*/
+	/*background: url('../images/page_loader.gif') no-repeat rgb(249,249,249);*/
+	/*background-size: cover;*/
+}
+
+.loader img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}		

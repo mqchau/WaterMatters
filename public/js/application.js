@@ -33,6 +33,7 @@ wm.getCountyData = function (stateAb){
 						return function() {
 							$('#textLabelCounty').html(countyList[j])
 							wm.showData();
+							$(".loader").show();
 							wm.getWaterData(stateAb,countyList[j])
 						};
 					}(k));
@@ -81,6 +82,7 @@ wm.getStateData();
 
 
 $('#localButton').click(function(){
+	$(".loader").show();
 	$.ajax({
 		type: 'GET', 
 		url: '/ajaxget',
@@ -113,6 +115,7 @@ wm.getWaterData = function(state,county) {
 		success: function (data) {
 			$("#AjaxGetReturn").html(data);
 			wm.showViz1(data);
+			$(".loader").fadeOut("fast");
 		},
 		error: function (xhr, status, error) {
 			console.log('Error: ' + error.message);
@@ -304,3 +307,7 @@ ProfileDonut.init = function() {
     };
 }
 
+$(document).ready(function(){
+	//hide the loader in the begining
+	$(".loader").hide();	
+});
