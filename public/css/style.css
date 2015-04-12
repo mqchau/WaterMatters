@@ -33,6 +33,10 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
+@font-face {
+  font-family: 'Pacifico';
+  src: url('/fonts/Pacifico.ttf'); 
+}
 
 .blue-box {
 	background-color :#0E3A53;
