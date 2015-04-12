@@ -22,7 +22,7 @@
         <button type="button" id="localButton" class="btn btn-default" aria-label="Left Align" >
           <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Detect my position
         </button>
-
+        <div id="localisationText"> </div>
         <br>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -52,15 +52,17 @@
     </div>
 
     <div id="dataPage" style="display:none;">
-     <div class="row">
-      <div class="col-md-6">
-        <div id="dataViz1" style="position: relative;
-        bottom: 0;">
+     <div class="row" style="text-align:center">
+      <div class="col-md-6" style="text-align:center">
+         <span class="skillName"  style="padding-bottom:50px" >Usage Distribution</span>
+        <div id="dataViz1"  style="position: relative;
+        bottom: 0;margin-top:50px">
         <div class="barsLabel" style="width:300px;text-align:center"></div> 
         </div>
       </div>
-      <div class="col-md-6">
-        <div id="dataViz2" style="position: relative;
+      <div class="col-md-6" style="text-align:center">
+         <div class="skillName" style="padding-bottom:50px">Usage Distribution</div>
+        <div id="dataViz2"style="position: relative;margin-top:50px
         bottom: 0;"> 
             <div class="profileDonut row" colors='["#0C354B","#92D14F","#BF9100","#A27387"]'></div>
             <div class="profileDonutLabel skillName" style="width:300px;text-align:center"></div>
