@@ -140,8 +140,19 @@ wm.showViz1 = function(data) {
 
 	wm.buildResourceUseViz();
 	ProfileDonut.init();
+	wm.showViz3();
 };
 
+wm.showViz3 = function () {
+	for (var i = 0; i < WaterConsumptionBreakdown.length; i++) {
+		$('#dataViz3').append('<ul>')
+		$('#dataViz3').append('<li>' + WaterConsumptionBreakdown[i].Name + '</li>')
+		$('#dataViz3').append('<div>Consumption: ' + WaterConsumptionBreakdown[i].Consumption + '</div>')
+		$('#dataViz3').append('<div>Solution: ' + WaterConsumptionBreakdown[i].Solution + '</div>')
+		$('#dataViz3').append('<div>Saving: ' + WaterConsumptionBreakdown[i].Saving + '</div>')
+		$('#dataViz3').append('</ul>')
+	};
+}
 wm.buildResourceUseViz = function() {
 	wm.resourceData;
 	wm.usageData;
