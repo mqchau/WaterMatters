@@ -15,6 +15,9 @@ def convertWaterSupplyDemandData(Lines):
 		if len(ThisLine) < 20:
 			break
 		try:
+			for idx in xrange(len(ThisLine)):
+				if ThisLine[idx] == '':
+					ThisLine[idx] = 0 
 			newrow = {
 				"StateAbbr": ThisLine[0],
 				"County": ThisLine[1],
@@ -22,43 +25,34 @@ def convertWaterSupplyDemandData(Lines):
 					{
 						"Year": 2010,
 						"TotalPopulation" : float(ThisLine[3]) ,
-						"DomesticUsageFreshWater" : float(ThisLine[4]) ,
-						"PublicSupply": float(ThisLine[5]),
-						"Industrial": float(ThisLine[6]),
-						"Irrigation": float(ThisLine[7]),
-						"IrrigationCrop": float(ThisLine[8]),
-						"Livestock": float(ThisLine[9]),
-						"Aquaculture": float(ThisLine[10]),
-						"Mining": float(ThisLine[11]),
-						"ThermalElectric": float(ThisLine[12]),
-						"ThermalElectricOneThrough": float(ThisLine[13]),
-						"ThermalElectricRecirculation": float(ThisLine[14]),
-						"TotalGroundWater": float(ThisLine[15]),
-						"TotalFreshWater": float(ThisLine[16])
+						"DomesticUsageFreshWaterPerDay" : float(ThisLine[4]) ,
+						"DomesticUsageFreshWaterPerYear" : round(float(ThisLine[5]) / 1e6, 2) ,
+						"PublicSupplyPerDay": float(ThisLine[6]),
+						"PublicSupplyPerYear": round(float(ThisLine[7]) / 1e6, 2),
+						"IndustrialPerDay": float(ThisLine[8]),
+						"IndustrialPerYear": round(float(ThisLine[9]) / 1e6, 2),
+						"IrrigationPerDay": float(ThisLine[10]),
+						"IrrigationPerYear": round(float(ThisLine[11]) / 1e6, 2),
+						"IrrigationCropPerDay": float(ThisLine[12]),
+						"IrrigationCropPerYear": round(float(ThisLine[13]) / 1e6, 2),
+						"LivestockPerDay": float(ThisLine[14]),
+						"LivestockPerYear": round(float(ThisLine[15]) / 1e6, 2),
+						"AquaculturePerDay": float(ThisLine[16]),
+						"AquaculturePerYear": round(float(ThisLine[17]) / 1e6, 2),
+						"MiningPerDay": float(ThisLine[18]),
+						"MiningPerYear": round(float(ThisLine[19]) / 1e6, 2),
+						"ThermalElectricPerDay": float(ThisLine[20]),
+						"ThermalElectricPerYear": round(float(ThisLine[21]) / 1e6, 2),
+						"ThermalElectricOneThroughPerDay": float(ThisLine[22]),
+						"ThermalElectricOneThroughPerYear": round(float(ThisLine[23]) / 1e6, 2),
+						"ThermalElectricRecirculationPerDay": float(ThisLine[24]),
+						"ThermalElectricRecirculationPerYear": round(float(ThisLine[25]) / 1e6, 2),
+						"TotalFreshWaterPerDay": float(ThisLine[26]),
+						"TotalFreshWaterPerYear": round(float(ThisLine[27]) / 1e6, 2),
+						"TotalGroundWaterPerDay": float(ThisLine[28]),
+						"TotalGroundWaterPerYear": round(float(ThisLine[29]) / 1e6, 2)
 						}
-					#{
-					#    "Year": 2005,
-					#    "DomesticUsage" : float(ThisLine[10]) ,
-					#    "TotalSupplyOfFreshWater" : float(ThisLine[11]),
-					#    "TotalPopulation" : float(ThisLine[12]),
-					#    "TotalGroundWater" : float(ThisLine[13]),
-					#    "TotalConsumptionOfWater" : float(ThisLine[14])
-					#    },
-					#{
-					#    "Year": 2000,
-					#    "DomesticUsage" : float(ThisLine[17]),
-					#    "TotalSupplyOfFreshWater" : float(ThisLine[18]),
-					#    "TotalPopulation" : float(ThisLine[19]),
-					#    "TotalGroundWater" : float(ThisLine[20])
-					#},
-					#{
-					#    "Year": 1995,
-					#    "DomesticUsage" : float(ThisLine[23]) ,
-					#    "TotalSupplyOfFreshWater" : float(ThisLine[24]),
-					#    "TotalPopulation" : float(ThisLine[25]),
-					#    "TotalGroundWater" : float(ThisLine[26]),
-					#    "TotalConsumptionOfWater" : float(ThisLine[27])
-					#}]
+
 					]
 				}
 			insertWaterSupplyDemandTable(WaterSupplyDemandTable,newrow)
@@ -66,7 +60,7 @@ def convertWaterSupplyDemandData(Lines):
 			import pprint
 			pp = pprint.PrettyPrinter(indent=4)
 			print "Can't process this line: %s " % pp.pformat(ThisLine)
-			#break
+			break
 			pass
 
 	return WaterSupplyDemandTable
