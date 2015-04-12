@@ -172,7 +172,14 @@ app.get('/ajaxget', function(req, res){
 		} 
 
 		satelize.satelize({ip:ip}, function(err, geoData){
-			var obj = JSON.parse(geoData);
+			try {
+				var obj = JSON.parse(geoData);
+			} catch (err){
+				var obj = {
+					city: "Irvine",
+					region_code: "CA"
+				};
+			}
 			GetCityInformation( obj.city.replace(' ', '%20'), obj.region_code, function (cityinfo,StateAbbr){
 				res.end(JSON.stringify({
 					"County": cityinfo[0].full_county_name,
