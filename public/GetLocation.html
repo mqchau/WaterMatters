@@ -27,7 +27,7 @@
 				}
 			});
 
-			var AjaxTestSelection = 2;
+			var AjaxTestSelection = 3;
 			if (AjaxTestSelection == 1){
 				$.ajax({
 					type: 'GET', // added,
@@ -50,6 +50,23 @@
 					data: {
 						functionName: "getCountyList",
 						abbreviation: 'CA'
+					},
+					success: function (data) {
+						console.log(data);
+						$("#AjaxGetReturn").html(data);
+					},
+					error: function (xhr, status, error) {
+						console.log('Error: ' + error.message);
+					}
+				});
+			} else if (AjaxTestSelection == 3) {
+				$.ajax({
+					type: 'GET', 
+					url: '/ajaxget',
+					data: {
+						functionName: "getWaterData",
+						StateAbbr: 'CA',
+						County: 'Yolo County'
 					},
 					success: function (data) {
 						console.log(data);

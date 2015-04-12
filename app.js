@@ -15,6 +15,8 @@ var cfenv = require('cfenv');
 var requestIp = require('request-ip');
 var http = require('http');
 var hardcode_data = require('./hardcode_data');
+var WaterSupplyDemandDataLib = require('./WaterSupplyDemandData'); 
+var WaterSupplyDemandData = WaterSupplyDemandDataLib.WaterSupplyDemandData;
 
 // create a new express server
 var app = express();
@@ -46,6 +48,15 @@ function GetCityInformation(CityName, StateName, callback) {
 
 };
 
+function getWaterDataByStateCounty(StateAbbr, County){
+	for (var i  = 0; i < WaterSupplyDemandData.length; i++){
+		if (WaterSupplyDemandData[i].StateAbbr == StateAbbr && WaterSupplyDemandData[i].County == County){
+			return WaterSupplyDemandData[i];
+		}
+
+	}
+	return null;
+}
 function getCountyList(StateAbbr, callback){
 	
     return http.get({
@@ -101,7 +112,13 @@ app.get('/ajaxget', function(req, res){
 				"CountyList": data 
 			}));
 		});
-	
+	} else if (data.functionName == 'getWaterData'){
+		var lookup_result = getWaterDataByStateCounty(data.StateAbbr, data.County);
+		if (lookup_result == null){ 
+			res.send(500, {'error': "Can't find info for this state and county"});
+		} else {
+			res.end(JSON.stringify(lookup_result));
+		}
 	}
 });
 
