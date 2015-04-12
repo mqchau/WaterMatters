@@ -1,3 +1,16 @@
-body {
+.localButton {
+	display: block;
+	width:300px;
+	margin: 20px auto;
+	padding: 20px;
+}
 
+.dropdown {
+	display: block;
+	width:300px;
+	margin: 20px auto;
+}
+
+#homePage {
+	padding:20px;
 }
