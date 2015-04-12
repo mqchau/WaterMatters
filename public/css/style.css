@@ -14,3 +14,187 @@
 #homePage {
 	padding:20px;
 }
+
+#dataPage {
+	height:200px;
+}
+
+#dataViz1 {
+    margin: 0 auto;
+    width: 200px;
+    height:200px;
+    text-align: center;
+}
+
+
+
+
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+
+.blue-box {
+	background-color :#0E3A53;
+	padding :4px;
+	color : #ffffff;
+	font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 auto;
+    max-width: 200px;
+}
+
+
+.short-description {
+	color : #0E3A53;
+	font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 700;
+    padding: 12px 0 5px;
+}
+
+.long-description {
+	color : #898989;
+    font-size: 14px;
+    /*font-weight: 700;*/
+    margin: 0 auto;
+    max-width: 280px;
+}
+
+.card {
+	background-color: #ffffff;
+	padding: 15px;
+	margin : 5px;
+}
+
+.card h2 {
+	/*padding :4px;*/
+	margin :4px;
+	margin-bottom: 20px;
+	color : #0E3A53;
+	font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.skillName {
+	color :#082B41;
+	text-transform: uppercase;
+	font-size: 12px;
+	margin-left:5px;
+	margin-top:5px;
+	font-weight: 900;
+}
+
+.outer-skill-bar {
+	height :10px;
+	width: 100px;
+	margin: 5px;
+	background-color : #D3D3D3;
+}
+
+.inner-language-bar {
+	height :10px;
+	background-color : #0C354B;
+}
+
+.inner-skill-bar {
+	height :10px;
+	background-color : #92D14F;
+}
+
+.labelsContainer {
+	margin-top: 50px;
+}
+
+.categoryCircle {
+	border-radius: 50px;
+	height :20px;
+	width :20px;
+	margin-bottom: 7px;
+}
+
+.categoryText {
+	position: absolute;
+	margin-left: 30px;
+	margin-bottom: 3px;
+	color :#082B41;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 900;
+}
+
+.year-education {
+	color : #9B9B9B;
+	font-weight : 900;
+	display :inline-block;
+}
+
+.content-education {
+	display :inline-block;
+	color : #0C4161;
+}
+
+.content-education-title {
+	color : #082B41;
+	font-weight : 900;
+	margin-right: 7px;
+	display :inline-block;
+}
+.content-education-location {
+	color : #9B9B9B;
+	font-style: italic;
+}
+
+
+.contactIcon-container {
+	width: 50px;
+	text-align: center;
+}
+
+.contactIcon {
+	left: 30px;
+	line-height: 20px;
+	position:absolute;
+	-webkit-transition: font-size 0.7s; /* For Safari 3.1 to 6.0 */
+    transition: font-size 0.7s;
+}
+
+.contactLine {
+	padding-bottom : 10px;
+}
+
+a {
+	color: inherit;
+}
+
+a:hover{
+	text-decoration: none;
+	color: inherit;
+}
+
+a:focus{
+	text-decoration: none;
+	color: inherit;
+}
+
+.titleIcon{
+	font-size: 18px;
+	padding-right: 7px;
+}
+
+.contactLine:hover{
+  color : white;
+}
+
+.contactLine:hover > .contactIcon-container > .contactIcon{
+  font-size: 25px;
+}
+
+.contactText-container{
+	font-weight: 700;
+	color: #EAEBE7;
+}

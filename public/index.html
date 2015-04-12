@@ -12,6 +12,7 @@
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   </head>
 
   <body>
@@ -44,12 +45,23 @@
       </div>
     </div>
 
-    <div id="dataPage" style="display:none">
-      qsdsqdsqd
-     <!--  sqdsqdsqdqsd
-      <button type="button" id="homeButton" class="btn btn-default" aria-label="Left Align" >
-          <span class="glyphicon glyphicon glyphicon-home" aria-hidden="true"></span>
-        </button> -->
+    <div id="dataPage" style="display:none;">
+     <div class="row">
+      <div class="col-xs-6 col-md-6">
+        <div id="dataViz1" style="position: relative;
+        bottom: 0;"> 
+        </div>
+      </div>
+      <div class="col-xs-6 col-md-6">
+        <div id="dataViz2" style="position: relative;
+        bottom: 0;"> 
+            <div class="profileDonut row" colors='["#0C354B","#92D14F","#BF9100","#A27387"]'></div>
+            <div class="profileDonutLabe" style="width:300px;text-align:center"></div>
+        </div>
+      </div>
+    </div>
+    
+
     </div>
 
     <script src="js/application.js"></script>
