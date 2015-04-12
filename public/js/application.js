@@ -2,9 +2,9 @@
 $('.dropdown-toggle').dropdown();
 
 
-var usageDataLabels =["Aquaculture","DomesticUsageFreshWater","Industrial","Irrigation","IrrigationCrop","Livestock","Mining"
-,"PublicSupply","ThermalElectric","ThermalElectricOneThrough","ThermalElectricRecirculation"];
-var resourceDataLabels =["TotalFreshWater","TotalGroundWater"];
+var usageDataLabels =["AquaculturePerDay","DomesticUsageFreshWaterPerDay","IndustrialPerDay","IrrigationPerDay","IrrigationCropPerDay","LivestockPerDay","MiningPerDay"
+,"PublicSupplyPerDay","ThermalElectricPerDay","ThermalElectricOneThroughPerDay","ThermalElectricRecirculationPerDay"];
+var resourceDataLabels =["TotalFreshWaterPerDay","TotalGroundWaterPerDay"];
 
 var wm = {};
 
