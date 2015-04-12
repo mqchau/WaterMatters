@@ -17,18 +17,30 @@
   <body>
     <div id="homePage">
       <div class="text-center"> 
+
         <button type="button" id="localButton" class="btn btn-default" aria-label="Left Align" >
-          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Detect my position
         </button>
+
         <br>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-            Dropdown
+            <span id="textLabelState">Select a state</span>
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" id="myDropdown" role="menu" aria-labelledby="dropdownMenu1">
           </ul>
         </div>
+
+        <div class="dropdown" style="display:none">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            <span id="textLabelCounty">Select a county</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" id="myDropdownCounty" role="menu" aria-labelledby="dropdownMenuCounty">
+          </ul>
+        </div>
+
       </div>
     </div>
 
