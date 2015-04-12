@@ -21,35 +21,45 @@ def convertWaterSupplyDemandData(Lines):
 				"InfoByYear": [
 					{
 						"Year": 2010,
-						"DomesticUsage" : float(ThisLine[3]) ,
-						"TotalSupplyOfFreshWater" : float(ThisLine[4]) ,
-						"TotalPopulation" : float(ThisLine[5]) ,
-						"TotalGroundWater" : float(ThisLine[6]) ,
-						"TotalConsumptionOfWater" : float(ThisLine[7]) 
-						},
-					{
-						"Year": 2005,
-						"DomesticUsage" : float(ThisLine[10]) ,
-						"TotalSupplyOfFreshWater" : float(ThisLine[11]),
-						"TotalPopulation" : float(ThisLine[12]),
-						"TotalGroundWater" : float(ThisLine[13]),
-						"TotalConsumptionOfWater" : float(ThisLine[14])
-						},
-					{
-						"Year": 2000,
-						"DomesticUsage" : float(ThisLine[17]),
-						"TotalSupplyOfFreshWater" : float(ThisLine[18]),
-						"TotalPopulation" : float(ThisLine[19]),
-						"TotalGroundWater" : float(ThisLine[20])
-					},
-					{
-						"Year": 1995,
-						"DomesticUsage" : float(ThisLine[23]) ,
-						"TotalSupplyOfFreshWater" : float(ThisLine[24]),
-						"TotalPopulation" : float(ThisLine[25]),
-						"TotalGroundWater" : float(ThisLine[26]),
-						"TotalConsumptionOfWater" : float(ThisLine[27])
-					}]
+						"TotalPopulation" : float(ThisLine[3]) ,
+						"DomesticUsageFreshWater" : float(ThisLine[4]) ,
+						"PublicSupply": float(ThisLine[5]),
+						"Industrial": float(ThisLine[6]),
+						"Irrigation": float(ThisLine[7]),
+						"IrrigationCrop": float(ThisLine[8]),
+						"Livestock": float(ThisLine[9]),
+						"Aquaculture": float(ThisLine[10]),
+						"Mining": float(ThisLine[11]),
+						"ThermalElectric": float(ThisLine[12]),
+						"ThermalElectricOneThrough": float(ThisLine[13]),
+						"ThermalElectricRecirculation": float(ThisLine[14]),
+						"TotalGroundWater": float(ThisLine[15]),
+						"TotalFreshWater": float(ThisLine[16])
+						}
+					#{
+					#    "Year": 2005,
+					#    "DomesticUsage" : float(ThisLine[10]) ,
+					#    "TotalSupplyOfFreshWater" : float(ThisLine[11]),
+					#    "TotalPopulation" : float(ThisLine[12]),
+					#    "TotalGroundWater" : float(ThisLine[13]),
+					#    "TotalConsumptionOfWater" : float(ThisLine[14])
+					#    },
+					#{
+					#    "Year": 2000,
+					#    "DomesticUsage" : float(ThisLine[17]),
+					#    "TotalSupplyOfFreshWater" : float(ThisLine[18]),
+					#    "TotalPopulation" : float(ThisLine[19]),
+					#    "TotalGroundWater" : float(ThisLine[20])
+					#},
+					#{
+					#    "Year": 1995,
+					#    "DomesticUsage" : float(ThisLine[23]) ,
+					#    "TotalSupplyOfFreshWater" : float(ThisLine[24]),
+					#    "TotalPopulation" : float(ThisLine[25]),
+					#    "TotalGroundWater" : float(ThisLine[26]),
+					#    "TotalConsumptionOfWater" : float(ThisLine[27])
+					#}]
+					]
 				}
 			insertWaterSupplyDemandTable(WaterSupplyDemandTable,newrow)
 		except Exception as e:

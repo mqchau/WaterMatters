@@ -11,7 +11,8 @@
 		"body-parser": "latest",
 		"satelize": "latest",
 		"request-ip": "latest",
-		"http": "latest"
+		"http": "latest",
+		"mongodb": "latest"
 	},
 	"repository": {}
 }
