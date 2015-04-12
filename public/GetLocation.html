@@ -27,7 +27,7 @@
 				}
 			});
 
-			var AjaxTestSelection = 1;
+			var AjaxTestSelection = 2;
 			if (AjaxTestSelection == 1){
 				$.ajax({
 					type: 'GET', // added,
@@ -44,7 +44,21 @@
 					}
 				});
 			} else if (AjaxTestSelection == 2) {
-
+				$.ajax({
+					type: 'GET', 
+					url: '/ajaxget',
+					data: {
+						functionName: "getCountyList",
+						abbreviation: 'CA'
+					},
+					success: function (data) {
+						console.log(data);
+						$("#AjaxGetReturn").html(data);
+					},
+					error: function (xhr, status, error) {
+						console.log('Error: ' + error.message);
+					}
+				});
 			}
 	
 		});

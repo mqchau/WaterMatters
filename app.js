@@ -46,6 +46,30 @@ function GetCityInformation(CityName, StateName, callback) {
 
 };
 
+function getCountyList(StateAbbr, callback){
+	
+    return http.get({
+        host: 'api.sba.gov',
+        path: '/geodata/county_links_for_state_of/' + StateAbbr + '.json'
+    }, function(response) {
+        // Continuously update stream with data
+        var body = '';
+        response.on('data', function(d) {
+            body += d;
+        });
+        response.on('end', function() {
+
+            // Data reception is done, do whatever with it!
+            var parsed = JSON.parse(body);
+			var processed = parsed.map(function(array_elem){
+				return array_elem.name;
+			});	
+            callback(processed);
+        });
+    });
+ar 
+}
+
 app.post('/login',function(req,res){
 	var data = req.body.data;
 	var ip = requestIp.getClientIp(req);
@@ -71,6 +95,14 @@ app.get('/ajaxget', function(req, res){
 		res.end(JSON.stringify({
 			"StateList": hardcode_data.StateList
 		}));
+	} else if (data.functionName == 'getCountyList'){
+		var StateAbbr = data.abbreviation;
+		getCountyList(StateAbbr, function(data){
+			res.end(JSON.stringify({
+				"CountyList": data 
+			}));
+		});
+	
 	}
 });
 
