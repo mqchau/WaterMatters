@@ -67,7 +67,6 @@ function getCountyList(StateAbbr, callback){
             callback(processed);
         });
     });
-ar 
 }
 
 app.post('/login',function(req,res){
