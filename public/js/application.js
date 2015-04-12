@@ -106,7 +106,7 @@ wm.getWaterData = function(state,county) {
 		type: 'GET', 
 		url: '/ajaxget',
 		data: {
-			functionName: "getWaterData",
+			functionName: "getWaterDataMongoDB",
 			StateAbbr: state,
 			County: county
 		},
