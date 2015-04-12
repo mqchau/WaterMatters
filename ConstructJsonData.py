@@ -21,29 +21,42 @@ def convertWaterSupplyDemandData(Lines):
 				"InfoByYear": [
 					{
 						"Year": 2010,
-						"DomesticUsage" : ThisLine[3],
-						"TotalSupplyOfFreshWater" : ThisLine[4],
-						"TotalPopulation" : ThisLine[5],
-						"TotalConsumptionOfWater" : ThisLine[6]
+						"DomesticUsage" : float(ThisLine[3]) ,
+						"TotalSupplyOfFreshWater" : float(ThisLine[4]) ,
+						"TotalPopulation" : float(ThisLine[5]) ,
+						"TotalGroundWater" : float(ThisLine[6]) ,
+						"TotalConsumptionOfWater" : float(ThisLine[7]) 
 						},
 					{
 						"Year": 2005,
-						"DomesticUsage" : ThisLine[10],
-						"TotalSupplyOfFreshWater" : ThisLine[11],
-						"TotalPopulation" : ThisLine[12],
-						"TotalConsumptionOfWater" : ThisLine[13]
+						"DomesticUsage" : float(ThisLine[10]) ,
+						"TotalSupplyOfFreshWater" : float(ThisLine[11]),
+						"TotalPopulation" : float(ThisLine[12]),
+						"TotalGroundWater" : float(ThisLine[13]),
+						"TotalConsumptionOfWater" : float(ThisLine[14])
 						},
 					{
+						"Year": 2000,
+						"DomesticUsage" : float(ThisLine[17]),
+						"TotalSupplyOfFreshWater" : float(ThisLine[18]),
+						"TotalPopulation" : float(ThisLine[19]),
+						"TotalGroundWater" : float(ThisLine[20])
+					},
+					{
 						"Year": 1995,
-						"DomesticUsage" : ThisLine[16],
-						"TotalSupplyOfFreshWater" : ThisLine[17],
-						"TotalPopulation" : ThisLine[18],
-						"TotalConsumptionOfWater" : ThisLine[19]
+						"DomesticUsage" : float(ThisLine[23]) ,
+						"TotalSupplyOfFreshWater" : float(ThisLine[24]),
+						"TotalPopulation" : float(ThisLine[25]),
+						"TotalGroundWater" : float(ThisLine[26]),
+						"TotalConsumptionOfWater" : float(ThisLine[27])
 					}]
 				}
 			insertWaterSupplyDemandTable(WaterSupplyDemandTable,newrow)
 		except Exception as e:
-			print "Can't process this line: %s " % Lines[lineidx]
+			import pprint
+			pp = pprint.PrettyPrinter(indent=4)
+			print "Can't process this line: %s " % pp.pformat(ThisLine)
+			#break
 			pass
 
 	return WaterSupplyDemandTable
