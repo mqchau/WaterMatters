@@ -14,34 +14,38 @@ def convertWaterSupplyDemandData(Lines):
 		ThisLine = Lines[lineidx].split(',')
 		if len(ThisLine) < 20:
 			break
-		if lineidx == 1:
-			print ThisLine
-		insertWaterSupplyDemandTable(WaterSupplyDemandTable, {
-			"StateAbbr": ThisLine[0],
-			"County": ThisLine[1],
-			"InfoByYear": [
-				{
-					"Year": 2010,
-					"DomesticUsage" : ThisLine[3],
-					"TotalSupplyOfFreshWater" : ThisLine[4],
-					"TotalPopulation" : ThisLine[5],
-					"TotalConsumptionOfWater" : ThisLine[6]
-					},
-				{
-					"Year": 2005,
-					"DomesticUsage" : ThisLine[10],
-					"TotalSupplyOfFreshWater" : ThisLine[11],
-					"TotalPopulation" : ThisLine[12],
-					"TotalConsumptionOfWater" : ThisLine[13]
-					},
-				{
-					"Year": 2005,
-					"DomesticUsage" : ThisLine[16],
-					"TotalSupplyOfFreshWater" : ThisLine[17],
-					"TotalPopulation" : ThisLine[18],
-					"TotalConsumptionOfWater" : ThisLine[19]
-				}]
-			})
+		try:
+			newrow = {
+				"StateAbbr": ThisLine[0],
+				"County": ThisLine[1],
+				"InfoByYear": [
+					{
+						"Year": 2010,
+						"DomesticUsage" : ThisLine[3],
+						"TotalSupplyOfFreshWater" : ThisLine[4],
+						"TotalPopulation" : ThisLine[5],
+						"TotalConsumptionOfWater" : ThisLine[6]
+						},
+					{
+						"Year": 2005,
+						"DomesticUsage" : ThisLine[10],
+						"TotalSupplyOfFreshWater" : ThisLine[11],
+						"TotalPopulation" : ThisLine[12],
+						"TotalConsumptionOfWater" : ThisLine[13]
+						},
+					{
+						"Year": 1995,
+						"DomesticUsage" : ThisLine[16],
+						"TotalSupplyOfFreshWater" : ThisLine[17],
+						"TotalPopulation" : ThisLine[18],
+						"TotalConsumptionOfWater" : ThisLine[19]
+					}]
+				}
+			insertWaterSupplyDemandTable(WaterSupplyDemandTable,newrow)
+		except Exception as e:
+			print "Can't process this line: %s " % Lines[lineidx]
+			pass
+
 	return WaterSupplyDemandTable
 
 if __name__ == "__main__":

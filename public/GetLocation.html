@@ -76,6 +76,21 @@
 						console.log('Error: ' + error.message);
 					}
 				});
+			} else if (AjaxTestSelection == 4) {
+				$.ajax({
+					type: 'GET', 
+					url: '/ajaxget',
+					data: {
+						functionName: "getCurrentLocation"
+					},
+					success: function (data) {
+						console.log(data);
+						$("#AjaxGetReturn").html(data);
+					},
+					error: function (xhr, status, error) {
+						console.log('Error: ' + error.message);
+					}
+				});
 			}
 	
 		});

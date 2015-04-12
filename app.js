@@ -42,7 +42,7 @@ function GetCityInformation(CityName, StateName, callback) {
 
             // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
-            callback(parsed);
+            callback(parsed, StateName);
         });
     });
 
@@ -57,6 +57,7 @@ function getWaterDataByStateCounty(StateAbbr, County){
 	}
 	return null;
 }
+
 function getCountyList(StateAbbr, callback){
 	
     return http.get({
@@ -111,6 +112,26 @@ app.get('/ajaxget', function(req, res){
 			res.end(JSON.stringify({
 				"CountyList": data 
 			}));
+		});
+	} else if (data.functionName == 'getCurrentLocation'){
+		var data = req.body.data;
+		var ip = requestIp.getClientIp(req);
+
+		if (ip == "127.0.0.1"){
+			ip = "184.177.20.169";
+		} 
+
+		satelize.satelize({ip:ip}, function(err, geoData){
+			var obj = JSON.parse(geoData);
+			GetCityInformation( obj.city.replace(' ', '%20'), obj.region_code, function (cityinfo,StateAbbr){
+				res.end(JSON.stringify({
+					"County": cityinfo[0].full_county_name,
+					"State": cityinfo[0].state_name,
+					"StateAbbr": StateAbbr
+					}));
+				//res.end(JSON.stringify(cityinfo));
+			});
+
 		});
 	} else if (data.functionName == 'getWaterData'){
 		var lookup_result = getWaterDataByStateCounty(data.StateAbbr, data.County);
