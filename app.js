@@ -3,7 +3,16 @@
 //------------------------------------------------------------------------------
 // node.js starter application for Bluemix
 //------------------------------------------------------------------------------
-
+if (process.env.VCAP_SERVICES) {
+   var env = JSON.parse(process.env.VCAP_SERVICES);
+   var mongo = env['mongolab'][0].credentials;
+} else {
+   var mongo = {
+      "username" : "user1",
+      "password" : "secret",
+      "uri" : 'mongodb://127.0.0.1:27017/test'
+	};
+}
 // This application uses express as it's web server
 // for more info, see: http://expressjs.com
 var express = require('express');
@@ -19,7 +28,7 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
 // Connection URL
-var MongoUrl = 'mongodb://127.0.0.1:27017/test';
+var MongoUrl = mongo.uri;
 var WaterDataCollection = "WaterDataCollection";
 // Use connect method to connect to the Server
 //MongoClient.connect(MongoUrl, function(err, db) {
@@ -95,9 +104,9 @@ function getCountyList(StateAbbr, callback){
     });
 }
 //--------------------------------------------------
-// Routes allowed in this app
+// MongoDB
 //--------------------------------------------------
-MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
+MongoClient.connect(MongoUrl, function(err, db) {
 	db.createCollection('WaterDataCollection', function(err, collection){
 		if (err) { console.log("Got error creating collection"); throw err;}
 		collection.remove({});
@@ -110,7 +119,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
 function getWaterDataByStateCountyMongoDB(StateAbbr, County, callback){
 	
 	console.log("querying " + StateAbbr + " and county " + County);
-	MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
+	MongoClient.connect(MongoUrl, function(err, db) {
 		var collection = db.collection('WaterDataCollection');		
 		collection.findOne({"StateAbbr": StateAbbr, "County": County}, function(err, find_result){
 			if (err) throw err;	
