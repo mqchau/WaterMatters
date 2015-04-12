@@ -93,7 +93,7 @@ $('#localButton').click(function(){
 			$("#AjaxGetReturn").html(data);
 			var data =JSON.parse(data);
 			console.log(data.StateAbbr,data.County)
-			$('#localisationText').text('You are in ' + data.State + ' ' +data.County);
+			$('#localisationText').text('You are in ' + data.County + ' ' +data.State);
 			wm.getWaterData(data.StateAbbr,data.County);
 		},
 		error: function (xhr, status, error) {
