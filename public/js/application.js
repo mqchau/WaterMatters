@@ -146,7 +146,7 @@ wm.buildResourceUseViz = function() {
 	wm.usageData;
 
 	var svgDoc = d3.select("#dataViz1");
-	svgDoc.selectAll("div").remove();
+	$("#dataViz1").empty();
 	var maxHeight = 200;
 	var maxOne =Math.max(wm.resourceData, wm.usageData); 
 
@@ -162,7 +162,11 @@ wm.buildResourceUseViz = function() {
 		.transition()
 		.style("height",(wm.resourceData/maxOne)*200 +"px");
 
-	
+
+	// resourceDiv.on("mouseover",function(d){
+	// 	console.log(d)
+	// })
+
 	var useDiv = svgDoc.append("div")
 		.style("width","50px")
 		.style("height","0px")
@@ -185,6 +189,26 @@ wm.buildResourceUseViz = function() {
 		.style("font-family","Lato")
 		.style("left","108px")
 		.text("Usage");
+
+	svgDoc.append("span")
+		.style("position","absolute")
+		.style("bottom","-80px")
+		.style("font-family","Lato")
+		.style("left","30px")
+		.text("unit mGallons/day");	
+
+	svgDoc.append("span")
+		.style("position","absolute")
+		.style("bottom","-40px")
+		.style("font-family","Lato")
+		.style("left","40px")
+		.text(Math.round(wm.resourceData*100)/100);	
+	svgDoc.append("span")
+		.style("position","absolute")
+		.style("bottom","-40px")
+		.style("font-family","Lato")
+		.style("left","110px")
+		.text(Math.round(wm.usageData*100)/100);
 
 }
 
@@ -286,8 +310,8 @@ ProfileDonut.init = function() {
                         return arc.innerRadius(radius - 15)
                             .endAngle(2 * Math.PI * d)();
                     });
-                 $('.profileDonutLabe').empty();
-                 $('.profileDonutLabe').html(usageDataLabels[wm.usageDataByUsage.indexOf(d*wm.usageData)]);
+                 $('.profileDonutLabel').empty();
+                 $('.profileDonutLabel').html(usageDataLabels[wm.usageDataByUsage.indexOf(d*wm.usageData)]);
             });
 
             meter.on('mouseout', function() {
